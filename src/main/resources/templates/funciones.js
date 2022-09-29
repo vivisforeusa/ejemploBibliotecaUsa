@@ -1,5 +1,4 @@
 function listarLibros(){
-alert("Aquiiii");
 $.ajax({
 url: "http://localhost:8080/ListarLibros",
 type: "GET",
@@ -34,6 +33,9 @@ type: "GET",
 datatype: "JSON",
 success:function(respuesta){
 console.log(respuesta);
+texto=respuesta.isbn+" -- "+respuesta.titulo+" -- "+respuesta.autor;
+$('#libro').append("");
+$('#libro').append(texto);
 }
 });
 }
