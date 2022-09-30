@@ -2,15 +2,13 @@ package com.prestamos.Biblioteca.Controlador;
 
 import com.prestamos.Biblioteca.Entidades.Libro;
 import com.prestamos.Biblioteca.Servicios.libroServicio;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class libroControlador {
 
     private libroServicio servicio;
@@ -25,8 +23,17 @@ public class libroControlador {
     }
 
     @GetMapping("/BuscarLibro/{codigo}")
-    public Libro buscarUno(@PathVariable("codigo") String isbn){
+    public Optional<Libro> buscarUno(@PathVariable("codigo") String isbn){
         return servicio.buscarLibro(isbn);
     }
 
+    @GetMapping("/BuscarAutor/{autor}")
+    public List<Libro> porAutor(@PathVariable("autor") String autor){
+        return servicio.porAutor(autor);
+    }
+
+    @PostMapping("/InsertarLibro")
+    public String agregarLibro(@RequestBody Libro libro){
+      return servicio.agregarLibro(libro);
+    }
 }

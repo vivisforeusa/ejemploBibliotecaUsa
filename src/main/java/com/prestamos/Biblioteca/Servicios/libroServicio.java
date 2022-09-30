@@ -20,14 +20,22 @@ public class libroServicio {
         return (List<Libro>) repositorio.findAll(); //Consultar todos los libros
     }
 
-    public Libro buscarLibro(String isbn){
-        return repositorio.findById(isbn).get();
+    public Optional<Libro> buscarLibro(String isbn){
+        return repositorio.findById(isbn);
     }
 
+    public List<Libro> porAutor(String autor){
+        return repositorio.findByAutor(autor);
+    }
 
+    public String agregarLibro(Libro libro){
 
-    /*public List<Libro> porAutor(String autor){
-        return repositorio.fin
-    }*/
+        if(buscarLibro(libro.getIsbn()).isPresent()){
+            return "El Libro Ya Existe....";
+        }else{
+            repositorio.save(libro);
+            return "Libro registrado exitosamente.";
+       }
+    }
 
 }

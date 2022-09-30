@@ -22,6 +22,7 @@ myTabla+="<td>"+filas[i].no_page+"</td>";
 myTabla+="</tr>"
 }
 myTabla+="</table>";
+$('#tabla').empty();
 $('#tabla').append(myTabla);
 }
 
@@ -34,8 +35,21 @@ datatype: "JSON",
 success:function(respuesta){
 console.log(respuesta);
 texto=respuesta.isbn+" -- "+respuesta.titulo+" -- "+respuesta.autor;
-$('#libro').append("");
+$('#libro').empty();
 $('#libro').append(texto);
+}
+});
+}
+
+function buscarAutor(){
+let autor=$("#busautor").val();
+$.ajax({
+url:"http://localhost:8080/BuscarAutor/"+autor,
+type: "GET",
+datatype: "JSON",
+success:function(respuesta){
+console.log(respuesta);
+mostrarTabla(respuesta);
 }
 });
 }
