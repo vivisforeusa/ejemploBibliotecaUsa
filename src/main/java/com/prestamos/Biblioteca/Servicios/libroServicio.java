@@ -37,5 +37,30 @@ public class libroServicio {
             return "Libro registrado exitosamente.";
        }
     }
+    public String actualizar(Libro libro){
+        if(buscarLibro(libro.getIsbn()).isPresent()){
+            repositorio.save(libro);
+            return "Libro modificado exitosamente";
+        }else{
+            return "El libro a actulaizar no se encontro";
+        }
+    }
+
+    public String eliminar(String isbn){
+        if(buscarLibro(isbn).isPresent()){
+            repositorio.deleteById(isbn);
+            return "Libro eliminado.";
+        }else{
+            return "El Libro no se encontro";
+        }
+    }
+
+    public int total(){
+        return repositorio.totalLibros();
+    }
+
+    public List<Object> cantAutor(){
+        return repositorio.cantAutor();
+    }
 
 }

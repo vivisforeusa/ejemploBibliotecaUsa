@@ -32,8 +32,27 @@ public class libroControlador {
         return servicio.porAutor(autor);
     }
 
+    @GetMapping("/totalLibros")
+    public int total(){
+        return servicio.total();
+    }
+    @GetMapping("/cantAutor")
+    public List<Object> cantAutor(){
+        return servicio.cantAutor();
+    }
+
     @PostMapping("/InsertarLibro")
     public String agregarLibro(@RequestBody Libro libro){
       return servicio.agregarLibro(libro);
+    }
+
+    @PutMapping("/EditarLibro")
+    public String actualizarLibro(@RequestBody Libro libro){
+        return servicio.actualizar(libro);
+    }
+
+    @DeleteMapping("/EliminarLibro/{isbn}")
+    public String eliminarLibro(@PathVariable("isbn") String isbn){
+        return servicio.eliminar(isbn);
     }
 }
