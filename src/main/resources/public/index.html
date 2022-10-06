@@ -3,10 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css">
     <script src="funciones.js"></script>
     <title>Pruebas http</title>
 </head>
 <body>
+<div class="container unauthenticated">
+    <a href="/oauth2/authorization/github">Iniciar Sesion</a>
+</div>
+<div class="container authenticated">
+    Usuario:<span id="usuario"></span>
 <h1>Probando Servicios con Ajax </h1>
 <button onclick="listarLibros()">Consultar Todos</button>
 <hr>
@@ -28,5 +34,18 @@
 <input type="number" id="paginas" min="10">
 <button onclick="guardarLibro()">Guardar</button>
 <button onclick="actualizarLibro()">Actualizar</button>
+</div>
 </body>
+<script type="text/javascript">
+    $.get("/user", function(data){
+    if(data!=null){
+    $("#usuario").html(data.name);
+    $(".unauthenticated").hide()
+    $(".authenticated").show()
+    }else{
+    $(".unauthenticated").show()
+    $(".authenticated").hide()
+    }
+    });
+</script>
 </html>
