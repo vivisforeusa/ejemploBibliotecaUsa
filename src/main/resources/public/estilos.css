@@ -1,0 +1,64 @@
+body{
+background-image:url("https://thumbs.dreamstime.com/z/biblioteca-p%C3%BAblica-de-lectura-y-estudio-ilustraci%C3%B3n-vectorial-dibujos-planos-aislados-hombre-con-libros-mujer-mirando-trav%C3%A9s-203438087.jpg");
+background-size: cover;
+margin:0;
+padding:0;
+}
+
+.contheader{
+background-color:rgb(7,13,67);
+height:150px;
+display: flex;
+align-items: center;
+}
+
+.titulologo{
+background-color:0;
+color:rgb(225,227,239);
+width:50%;
+height:100px;
+margin-right:60px;
+display:flex;
+justify-content: space-evenly;
+align-items:center;
+font-family:'Franklin Gothic Medium','Arial Narrow';
+}
+
+.logo{
+background-image:url("https://leonautas.files.wordpress.com/2019/10/biblioteca-logo.png");
+width:150px;
+height:150px;
+background-size: contain;
+background-repeat: no-repeat;
+margin-top:50px;
+}
+
+.menu{
+background-color:0;
+width:40%;
+height:70px;
+display: flex;
+align-items:center;
+justify-content:center;
+}
+
+.lista{
+display:inline;
+background-color:rgb(42,45,74);
+width:200px;
+border-radius: 50px 10px;
+padding: 20px 10px
+}
+
+a{
+text-decoration: none;
+color: aliceblue;
+font-size: 18px;
+}
+
+.titulo{
+font-size:20px;
+font-weight:bold;
+display:flex;
+align-items:center;
+}
