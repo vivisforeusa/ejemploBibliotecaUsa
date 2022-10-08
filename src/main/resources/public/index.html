@@ -5,47 +5,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css">
     <script src="funciones.js"></script>
+    <link rel="stylesheet" href="estilos.css" type="text/css">
     <title>Pruebas http</title>
 </head>
 <body>
-<div class="container unauthenticated">
-    <a href="/oauth2/authorization/github">Iniciar Sesion</a>
-</div>
-<div class="container authenticated">
-    Usuario:<span id="usuario"></span>
-<h1>Probando Servicios con Ajax </h1>
-<button onclick="listarLibros()">Consultar Todos</button>
-<hr>
-<input type="text" id="busautor">
-<button onclick="buscarAutor()">Consultar Autor</button>
-<hr>
-<div id="tabla"></div>
-<hr>
-<div>
-    <input type="text" id="isbn">
-    <button onclick="consultaLibro()">Consulta Libro</button>
-</div>
-<div id="libro"></div>
-<hr>
-<input type="text" id="isbn_insert" placeholder="Isbn01">
-<input type="text" id="titulo" placeholder="Titulo">
-<input type="text" id="autor" placeholder="Autor">
-<input type="text" id="editorial" placeholder="Editorial">
-<input type="number" id="paginas" min="10">
-<button onclick="guardarLibro()">Guardar</button>
-<button onclick="actualizarLibro()">Actualizar</button>
-</div>
+<header class="contheader">
+    <div class="titulologo">
+        <div class="titulo"><h1>Gestion de Prestamos de Libros</h1></div>
+        <div class="logo"></div>
+    </div>
+    <nav class="menu">
+        <ul>
+            <li class="lista"><a href="/oauth2/authorization/github">Iniciar Sesion</a></li>
+            <li class="lista"><a href="libros.html">Libros</a></li>
+            <li class="lista"><a href="#">Estudiantes</a></li>
+            <li class="lista"><a href="#">Prestamos</a></li>
+        </ul>
+    </nav>
+</header>
+
+
 </body>
-<script type="text/javascript">
-    $.get("/user", function(data){
-    if(data!=null){
-    $("#usuario").html(data.name);
-    $(".unauthenticated").hide()
-    $(".authenticated").show()
-    }else{
-    $(".unauthenticated").show()
-    $(".authenticated").hide()
-    }
-    });
-</script>
 </html>
