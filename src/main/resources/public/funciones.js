@@ -1,4 +1,39 @@
+$(document).ready(function(){
+cards();
+$('#formActualizar').hide();
+});
+
+function cards(){
+$('#tarjeta').show();
+$.ajax({
+url: "http://localhost:8080/ListarLibros",
+type: "GET",
+datatype: "JSON",
+success:function(items){
+console.log(items);
+let tarjetas="";
+tarjetas+="<div class='container'><div class='row'>";
+for(i=0;i<items.length;i++){
+tarjetas+=`
+    <div class="card col-3">
+      <img src="https://universodeletras.unam.mx/app/uploads/2021/01/logo_bajate-un-libro.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${items[i].titulo}</h5>
+        <p class="card-text">${items[i].autor} ${items[i].editorial}</p>
+      </div>
+    </div>`
+}
+tarjetas+="</div></div>";
+$('#tarjeta').append(tarjetas);
+}
+});
+}
+
+
 function listarLibros(){
+$('#tarjeta').hide();
+$('#tabla').show();
+$('#formActualizar').hide();
 $.ajax({
 url: "http://localhost:8080/ListarLibros",
 type: "GET",
@@ -11,7 +46,19 @@ mostrarTabla(respuesta);
 }
 
 function mostrarTabla(filas){
-let myTabla="<table>";
+$('#libro').empty();
+let myTabla="<table class='table table-hover'>";
+myTabla+=`
+<thead>
+<th>Isbn</th>
+<th>Titulo</th>
+<th>Autor</th>
+<th>Editorial</th>
+<th>Paginas</th>
+<th>Editar</th>
+<th>Eliminar</th>
+</thead>
+`
 for(i=0; i<filas.length;i++){
 myTabla+="<tr>"
 myTabla+="<td>"+filas[i].isbn+"</td>";
@@ -19,8 +66,8 @@ myTabla+="<td>"+filas[i].titulo+"</td>";
 myTabla+="<td>"+filas[i].autor+"</td>";
 myTabla+="<td>"+filas[i].editorial+"</td>";
 myTabla+="<td>"+filas[i].no_page+"</td>";
-myTabla+="<td><button onclick='cargarDatos(\""+filas[i].isbn+"\")'>Editar</button>"
-myTabla+="<td><button onclick='eliminarLibro(\""+filas[i].isbn+"\")'>Eliminar</button>"
+myTabla+="<td><button class='btn btn-warning' onclick='cargarDatos(\""+filas[i].isbn+"\")'>Editar</button>"
+myTabla+="<td><button class='btn btn-danger' onclick='eliminarLibro(\""+filas[i].isbn+"\")'>Eliminar</button>"
 myTabla+="</tr>"
 }
 myTabla+="</table>";
@@ -29,6 +76,8 @@ $('#tabla').append(myTabla);
 }
 
 function consultaLibro(){
+$('#tarjeta').hide();
+$('#libro').empty();
 let codigo=$("#isbn").val();
 $.ajax({
 url: "http://localhost:8080/BuscarLibro/"+codigo,
@@ -37,8 +86,7 @@ datatype: "JSON",
 success:function(respuesta){
 console.log(respuesta);
 if(respuesta!=null){
-texto=respuesta.isbn+" -- "+respuesta.titulo+" -- "+respuesta.autor;
-$('#libro').empty();
+texto="Libro: "+respuesta.isbn+",  Titulo: "+respuesta.titulo+",  Autor: "+respuesta.autor+",  Editorial: "+respuesta.editorial;
 $('#libro').append(texto);
 }else{
 alert("El Libro no se encontro.");
@@ -48,6 +96,7 @@ alert("El Libro no se encontro.");
 }
 
 function buscarAutor(){
+$('#tarjeta').hide();
 let autor=$("#busautor").val();
 $.ajax({
 url:"http://localhost:8080/BuscarAutor/"+autor,
@@ -79,12 +128,16 @@ contentType:"application/JSON",
 datatype:JSON,
 success:function(respuesta){
 alert(respuesta);
+window.location.href="http://localhost:8080/libros.html";
 }
 });
+
 }
 
 function cargarDatos(codigo){
 alert(codigo);
+$('#tabla').hide();
+$('#formActualizar').show();
 $.ajax({
 url: "http://localhost:8080/BuscarLibro/"+codigo,
 type: "GET",
@@ -110,6 +163,7 @@ editorial: $('#editorial').val(),
 no_page:$('#paginas').val()
 }
 let datosJson=JSON.stringify(datos);
+$('#formActualizar').hide();
 $.ajax({
 url:"http://localhost:8080/EditarLibro",
 type: "PUT",

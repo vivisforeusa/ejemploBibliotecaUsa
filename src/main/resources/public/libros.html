@@ -4,37 +4,59 @@
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/ja/bootstrap.min.js"></script>
     <script src="funciones.js"></script>
     <title>Gestion de Libros</title>
 </head>
 <body>
 
-<div class="container unauthenticated">
-    <a href="/oauth2/authorization/github">Iniciar Sesion</a>
+<div class="container authenticated mb-3">
+   <h1 class="bg-primary display-1 text-light mb-0">Gestion de Libros</h1>
+    <h5 class="bg-primary dispaly-5 mt-0">Usuario:<span id="usuario"></span></h5>
 </div>
-<div class="container authenticated">
-    Usuario:<span id="usuario"></span>
-<h1>Probando Servicios con Ajax </h1>
-<button onclick="listarLibros()">Consultar Todos</button>
-<hr>
-<input type="text" id="busautor">
-<button onclick="buscarAutor()">Consultar Autor</button>
-<hr>
-<div id="tabla"></div>
-<hr>
+<div class="container">
+    <button onclick="listarLibros()" class="btn btn-primary">Consultar Todos</button>
+    <a href="agregar.html"><button class="btn btn-primary">Agregar Libro</button></a>
+</div>
+<div class="container mt-3">
+    <input type="text" id="busautor">
+    <button onclick="buscarAutor()" class="btn btn-primary">Consultar Autor</button>
+    <input type="text" id="isbn" >
+    <button onclick="consultaLibro()" class="btn btn-primary">Consulta Libro</button></div>
+
 <div>
-    <input type="text" id="isbn">
-    <button onclick="consultaLibro()">Consulta Libro</button>
+<div class="m-3" id="tarjeta"></div>
+
+
 </div>
-<div id="libro"></div>
-<hr>
-<input type="text" id="isbn_insert" placeholder="Isbn01">
-<input type="text" id="titulo" placeholder="Titulo">
-<input type="text" id="autor" placeholder="Autor">
-<input type="text" id="editorial" placeholder="Editorial">
-<input type="number" id="paginas" min="10">
-<button onclick="guardarLibro()">Guardar</button>
-<button onclick="actualizarLibro()">Actualizar</button>
+<div class="container bg-primary text-light mt-5" id="libro"></div>
+<div class="container mt-5" id="tabla"></div>
+
+
+<div class="container col-7 aling-center mt-5" id="formActualizar">
+<div class="container text-center m-5"><h2 class="text-success">Actualizar Libro</h2></div>
+<div class="mb-3">
+    <label class="form-label">Isbn</label>
+    <input  class="form-control" type="text" id="isbn_insert" placeholder="Isbn01">
+</div>
+<div class="mb-3">
+    <label class="form-label">Titulo</label>
+    <input  class="form-control"type="text" id="titulo" placeholder="Titulo">
+</div>
+<div class="mb-3">
+    <label class="form-label">Autor</label>
+    <input class="form-control" type="text" id="autor" placeholder="Autor">
+</div>
+<div class="mb-3">
+    <label class="form-label">Editorial</label>
+    <input class="form-control" type="text" id="editorial" placeholder="Editorial">
+</div>
+<div class="mb-3">
+    <label class="form-label">Paginas</label>
+    <input class="form-control" type="number" id="paginas" min="10">
+</div>
+<button class="btn btn-primary"  onclick="actualizarLibro()">Actualizar</button>
 </div>
 </body>
 <script type="text/javascript">
